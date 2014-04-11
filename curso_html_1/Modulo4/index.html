@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Propiedades</title>
+    <link href="properties.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table>
+    <h1 id="propertyName">Propiedades del objecto: </h1>
+    <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+    <tbody id="propertiesBody"></tbody>
+</table>
+
+<script type="text/javascript">
+    var obj, propName, propValue, ctrTable, ctrTitle;
+
+    do {
+        obj = window.prompt("Introduce el nombre del objeto a inspeccionar");
+        if( obj in window === false )
+        {
+            window.alert("El objeto 'window' no tiene la propiedad " + obj);
+            obj = "";
+        }
+    } while( obj === "");
+
+    ctrTitle = document.getElementById("propertyName");
+    ctrTitle.innerHTML += obj;
+    
+    ctrTable = document.getElementById("propertiesBody");
+    for( propName in window[obj]) {
+        if( typeof window[obj][propName] === "number" || typeof window[obj][propName] === "string" ) {
+            propValue = window[obj][propName];
+        } else {
+            propValue = "no imprimible";
+        }
+        
+        ctrTable.innerHTML += "<tr><td>" + propName + "</td><td>" + propValue +"</td></tr>";
+    }
+</script>
+</body>
+</html>

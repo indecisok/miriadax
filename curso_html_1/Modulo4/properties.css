@@ -1,0 +1,31 @@
+body
+{
+    background-color: white;
+    font-family: sans-serif;
+}
+
+table
+{
+    width: 100%;
+    border: 1px solid rgb(185,201,254);
+}
+thead
+{
+    background-color: rgb(185,201,254);
+}
+
+th
+{
+    padding: 0.5em;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even)
+{
+    background-color: rgb(232,237,255);    
+}
+
+tbody tr:hover
+{
+    background-color: rgb(202,202,153);
+}

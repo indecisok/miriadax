@@ -1,0 +1,70 @@
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
+
+html, body
+{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body
+{
+    background-color: white;
+    font-family: sans-serif;
+}
+
+button
+{
+    margin-bottom: 1em;
+    border-radius: 1em;
+    padding: .5em;
+    text-align: center;
+    text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
+    min-width: 8em;
+}
+
+#cronoTheme
+{
+    display:block;
+    width:100%;
+    height:75%;
+    //background-image: url(crono.jpg);
+    //background-repeat: no-repeat;
+}
+
+img
+{
+    width: 250px;
+    height: 300px;
+}
+
+#cronoTime
+{
+    position:absolute;
+    left: 25%;
+    top: 40%;
+    width: 8ex;
+    font-family: monospace;
+    font-size: 400%;
+    text-align: right;
+    padding: 0px;
+    /padding-right: 20%;
+    cursor:default;
+}
+
+#stops
+{
+    border-style: solid;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 230px;
+}
+
+.center
+{
+    width: 100%;
+    text-align: center;
+}

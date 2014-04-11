@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no" />
+    <title>Cronómetro</title>
+    <link href="crono.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="./zepto.min.js"></script>
+    <script type="text/javascript" src="./touch.js"></script>
+<script type="text/javascript">
+  $(function(){
+
+    localStorage.time = (localStorage.time || "0.0");
+    localStorage.stops = (localStorage.stops || "Vueltas:");
+
+    var t,
+        ctlCrono = $("#cronoTime"),
+        ctlStops = $("#stops");
+
+    function incr() {
+        localStorage.time = +localStorage.time + 0.01;
+        refresh();
+    };
+      
+    function refresh() {
+        ctlCrono.html((+localStorage.time).toFixed(2));
+    };
+
+    function updateState() {
+        if( t === undefined ) {
+            $("#startStop").html("Iniciar");
+        } else {
+            $("#startStop").html("Detener");
+        }
+        ctlStops.html(localStorage.stops);        
+    };
+      
+    function arrancar() {
+        t = setInterval(incr, 10);
+    };
+      
+    function parar() {
+        clearInterval(t);
+        t = undefined;
+        localStorage.stops += "<br> " + ctlCrono.html() + " seg.";
+    };
+
+    function init(){
+        if( t === undefined ) {
+            localStorage.time = "0.0";
+            localStorage.stops = "Vuetas:";
+        }
+        refresh();
+        updateState();
+    };
+
+    function cambiar() {
+        if (!t) {
+            arrancar();
+        } else {
+            parar();
+        }
+        refresh();
+        updateState();
+    };
+      
+    $("#startStop").on('click', cambiar);
+    $("#init").on('click', init);
+
+    $("#cronoTheme,#cronoTime").on('tap', cambiar);
+    $("#cronoTheme,#cronoTime").on('swipe', init);
+            
+    refresh();
+    updateState();
+  });
+</script>
+</head>
+<body>
+<div id="cronoTheme">
+    <div class="center">
+    <button type="button" id="init" class="enabled">Inicializar</button>
+    <button type="button" id="startStop" class="enabled">Iniciar</button>
+    </div>
+    <img id="cronoTheme" src="crono.jpg"></img>
+    <div id="cronoTime">0.0</div>
+</div>
+<div id="stops"></div>
+</body>
+</html>
