@@ -1,41 +1,44 @@
 var map,
-    lat, lng,
-    latPrev, lngPrev;
+    latIni, lngIni,
+    latLast, lngLast;
 
 $(function() {
 
-    function enlazarMarcador(e) {
-        latPrev = lat;
-        lngPrev = lng;
-        lat = e.latLng.lat();
-        lng = e.latLng.lng();
-
+    function enlazar(lat0, lng0, lat1, lng1) {
         map.drawRoute({
-            origin: [latPrev, lngPrev],
-            destination: [lat, lng],
+            origin: [lat0, lng0],
+            destination: [lat1, lng1],
             travelMode: 'driving',
             strokeColor: '#000000',
             strokeOpacity: 0.6,
             strokeWeight: 5
         });
 
-        map.addMarker({ lat: lat, lng: lng});
+        latLast = lat1;
+        lngLast = lng1;
+
+        map.addMarker({ lat: latLast, lng: lngLast});
+    }
+
+    function enlazarMarcador(e) {
+        enlazar(latLast, lngLast, e.latLng.lat(), e.latLng.lng());
     }
 
     function geolocalizar() {
         GMaps.geolocate({
             success: function(position) {
-                lat = position.coords.latitude;
-                lng = position.coords.longitude;
-
+                latIni = position.coords.latitude;
+                lngIni = position.coords.longitude;
+                latLast = latIni;
+                lngLast = lngIni;
                 map = new GMaps({
                     el: '#map',
-                    lat: lat,
-                    lng: lng,
+                    lat: latIni,
+                    lng: lngIni,
                     click: enlazarMarcador,
                     tap: enlazarMarcador
                 });
-                map.addMarker({ lat: lat, lng: lng});
+                map.addMarker({ lat: latIni, lng: lngIni});
             },
             error: function(error) {
                 alert('Geolocalización falla: '+error.message);
@@ -45,6 +48,26 @@ $(function() {
             }
         });
     }
+
+    function compactar() {
+        map.cleanRoute();
+        map.removeMarkers();
+
+        map.addMarker({ lat: latIni, lng: lngIni});
+        enlazar(latIni, lngIni, latLast, lngLast);
+    }
+
+    function limpiar() {
+        map.cleanRoute();
+        map.removeMarkers();
+
+        latLast = latIni;
+        lngLast = lngIni;
+        map.addMarker({ lat: latIni, lng: lngIni});
+    }
+
+    $("#compactar").on('click', compactar);
+    $("#limpiar").on('click', limpiar);
 
     geolocalizar();
 });
