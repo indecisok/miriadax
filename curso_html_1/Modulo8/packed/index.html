@@ -1,0 +1,18 @@
+<html>
+
+<body>
+    <p>Instalador de Rutas</p>
+    <script>
+        // This URL must be a full url.
+        var manifestUrl = location.href.replace("index.html", "manifest.webapp");
+        var req = navigator.mozApps.installPackage(manifestUrl);
+        req.onsuccess = function() {
+            alert(this.result.origin);
+        };
+        req.onerror = function() {
+            alert(this.error.name);
+        };
+    </script>
+</body>
+
+</html>

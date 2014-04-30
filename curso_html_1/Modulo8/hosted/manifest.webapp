@@ -1,0 +1,20 @@
+{
+  "version": "0.1",
+  "name": "Rutas",
+  "description": "Creador de rutas",
+  "launch_path": "/host/0B8IId7KrHkTzZ0RTMmhqYTEzUTA/rutas.html",
+  "icons": {
+    "16":  "/host/0B8IId7KrHkTzZ0RTMmhqYTEzUTA/ico_16.png",
+    "48":  "/host/0B8IId7KrHkTzZ0RTMmhqYTEzUTA/ico_48.png",
+    "128": "/host/0B8IId7KrHkTzZ0RTMmhqYTEzUTA/ico_128.png"
+  },
+  "developer": {
+    "name": "indecisok",
+    "url": "http://indecisok.wordpress.com"
+  },
+  "permissions": {
+    "geolocation": {
+    "description" : "Requerido para posicionar en el mapa" 
+    }
+  }
+}
